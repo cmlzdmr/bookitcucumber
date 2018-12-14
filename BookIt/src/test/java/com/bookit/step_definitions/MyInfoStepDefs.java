@@ -155,9 +155,9 @@ public class MyInfoStepDefs {
 	    
 	    
 	    
-	    System.out.println(expectedLocation);
-	    System.out.println(expectedTeam);
-	    System.out.println(expectedBatchNumber);
+//	    System.out.println(expectedLocation);
+//	    System.out.println(expectedTeam);
+//	    System.out.println(expectedBatchNumber);
 	    
 	    assertEquals("Names are not matching",expectedFullname, aFullName);
 	    assertEquals("Roles are not matching",expectedRole, aRole);

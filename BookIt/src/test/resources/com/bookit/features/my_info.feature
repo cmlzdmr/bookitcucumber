@@ -12,12 +12,6 @@ Scenario: my self
 	When the user is on the my team page
 	Then team info should match the database records "efewtrell8c@craigslist.org"
 	
-Scenario: batches
-	Given I retrieve the batches information 
-	Then following batches should be displayed
-	|7|true |
-	|8|false|
-	|9|false|
 
 Scenario: my self 
 	Given user logs in using "efewtrell8c@craigslist.org" "jamesmay"

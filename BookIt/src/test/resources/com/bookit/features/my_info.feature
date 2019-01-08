@@ -1,6 +1,6 @@
 Feature: Information about me
 
-#@temp @db
+
 Scenario: my self 
 	Given user logs in using "efewtrell8c@craigslist.org" "jamesmay"
 	When the user is on the my self page

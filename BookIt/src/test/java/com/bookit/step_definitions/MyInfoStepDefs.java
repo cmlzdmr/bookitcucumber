@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebElement;
 
@@ -27,6 +28,7 @@ public class MyInfoStepDefs {
 	public void user_logs_in_using(String username, String password) {
 	   
 		Driver.getDriver().get(ConfigurationReader.getProperty("qa1_url"));
+		Driver.getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		Driver.getDriver().manage().window().maximize();
 		SigninPage signInPage = new SigninPage();
 	   signInPage.email.sendKeys(username);
@@ -44,25 +46,25 @@ public class MyInfoStepDefs {
 	
 	@Then("user info should match the database records {string}")
 	public void user_info_should_match_the_database_records(String email) {
-	   
-			String sql = "Select firstname,lastname,role from users\r\n" + 
-						"where email = 'efewtrell8c@craigslist.org'";
-		
-			List<Map<String,Object>> result = DBUtils.getQueryResultMap(sql);
-			//per requirements, we cannot have duplicated emails 
-			assertEquals("returned mulipte users with email:", 1, result.size());
 			
+			//writing our query 
+			String query = "Select firstname,lastname,role from users\r\n" + 
+						"where email = '"+email+"'";
+			
+			//assign result to map since it is one row 
+			Map<String,Object> result = DBUtils.getRowMap(query);
+						
 			//getting information and assigning to variable 
-			String expectedFirstName = (String) result.get(0).get("firstname");
-			String expectedLastName = (String) result.get(0).get("lastname");
-			String expectedRole = (String) result.get(0).get("role");
+			String expectedFirstName = (String) result.get("firstname");
+			String expectedLastName = (String) result.get("lastname");
+			String expectedRole = (String) result.get("role");
 			
-			//convertin to full name 
+			//converting to full name 
 			String expectedFullname = expectedFirstName+" "+expectedLastName;
 			//==============================================================
 		    SelfPage selfPage = new SelfPage();
-		    //update yuklenene kadar bekle 
 		    
+		    //wait until self page loaded 
 		    BrowserUtils.waitFor(2);
 		    String aFullName=selfPage.name.getText();
 		    String aRole = selfPage.role.getText();
@@ -81,14 +83,16 @@ public class MyInfoStepDefs {
 	}
 
 	@Then("team info should match the database records {string}")
-	public void team_info_should_match_the_database_records(String string) {
+	public void team_info_should_match_the_database_records(String email) {
 	    TeamPage teamPage= new TeamPage();
 	    
+	    //getting team member names from front-end
 	    List<String> actualNames =new ArrayList<>();
 	    for(WebElement el:teamPage.teamMemberNames){
 	    	actualNames.add(el.getText());
 	    }
 	    
+	    //getting roles from front-end 
 	    List<String> actualRoles =new ArrayList<>();
 
 	    for(WebElement el:teamPage.teamMemberRoles) {
@@ -96,18 +100,23 @@ public class MyInfoStepDefs {
 	    	actualRoles.add(el.getText());
 	    }
 	    
+	    //the query returns team member of given email
 		String sql = "select * from users\r\n" + 
-				"where team_id = (select team_id from users where email = 'efewtrell8c@craigslist.org')";
+				"where team_id = (select team_id from users where email = '"+email+"')";
 		
+		//assign query result to list of maps 
 		List<Map<String,Object>> result = DBUtils.getQueryResultMap(sql);
-			//comparing numbers 
+			
+		//before one by one comparison, checking number of members from UI and DB
 			assertEquals("team member numbers must be matching",result.size(), actualNames.size());
 			
+			//for each member from database, does our ui result includes that name ?
 			for(Map<String,Object> map:result) {
 				String firstName = (String) map.get("firstname");
 				assertTrue(actualNames.contains(firstName));
 			}
 			
+			//for each role from database does our ui includes that role ?
 			for(Map<String,Object> map:result) {
 				String role = (String) map.get("role");
 				assertTrue(actualRoles.contains(role));
@@ -119,26 +128,26 @@ public class MyInfoStepDefs {
 	}
 	
 	@Then("user info should match the all database records {string}")
-	public void user_info_should_match_the_all_database_records(String username) {
+	public void user_info_should_match_the_all_database_records(String email) {
 
 		String sql = "SELECT users.email, users.firstname, users.lastname,users.role, team.name as teamname, team.batch_number as batchnumber,campus.location\r\n" + 
 				"    FROM users INNER JOIN  team\r\n" + 
 				"        ON users.team_id = team.id\r\n" + 
 				"        INNER JOIN campus \r\n" + 
 				"        ON team.campus_id =campus.id\r\n" + 
-				"        where email = '"+username+"'";
+				"        where email = '"+email+"'";
 	
-		List<Map<String,Object>> result = DBUtils.getQueryResultMap(sql);
-		//per requirements, we cannot have duplicated emails 
-		assertEquals("returned mulipte users with email:", 1, result.size());
+		
+		Map<String,Object> queryResult = DBUtils.getRowMap(sql);
+		
 		
 		//getting information and assigning to variable 
-		String expectedFirstName = (String) result.get(0).get("firstname");
-		String expectedLastName = (String) result.get(0).get("lastname");
-		String expectedRole = (String) result.get(0).get("role");
-		String expectedTeam = (String) result.get(0).get("teamname");
-		int expectedBatchNumber = (int) result.get(0).get("batchnumber");
-		String expectedLocation = (String) result.get(0).get("location");
+		String expectedFirstName = (String) queryResult.get("firstname");
+		String expectedLastName = (String) queryResult.get("lastname");
+		String expectedRole = (String) queryResult.get("role");
+		String expectedTeam = (String) queryResult.get("teamname");
+		int expectedBatchNumber = (int) queryResult.get("batchnumber");
+		String expectedLocation = (String) queryResult.get("location");
 		
 		//converting to full name 
 		String expectedFullname = expectedFirstName+" "+expectedLastName;

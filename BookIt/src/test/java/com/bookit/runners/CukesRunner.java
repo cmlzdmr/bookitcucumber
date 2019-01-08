@@ -12,7 +12,7 @@ import cucumber.api.junit.Cucumber;
 				  "pretty"
 		
 		},
-		tags = "@temp or @db",
+		tags = "@temp",
 		features="src/test/resources/com/bookit/features",
 		glue="com/bookit/step_definitions",
 		dryRun=false

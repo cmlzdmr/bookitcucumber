@@ -26,10 +26,14 @@ public class DBUtils {
 	private static ResultSet resultSet;
 
 	public static void createConnection() {
+//		String url = ConfigurationReader.getProperty("dbUrl");
+//		String user = ConfigurationReader.getProperty("dbUsername");
+//		String password = ConfigurationReader.getProperty("dbPassword");
+//		
 		String url = ConfigurationReader.getProperty("qa1_db_host");
 		String user = ConfigurationReader.getProperty("qa1_db_username");
 		String password = ConfigurationReader.getProperty("qa1_db_password");
-
+		
 
 		try {
 			connection = DriverManager.getConnection(url, user, password);
@@ -111,7 +115,7 @@ public class DBUtils {
 				}
 
 				rowList.add(row);
-
+				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

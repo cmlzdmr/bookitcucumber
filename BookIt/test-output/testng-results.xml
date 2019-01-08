@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="8" passed="8">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="5557" started-at="2019-01-03T16:12:15Z" finished-at="2019-01-03T16:12:20Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="5557" started-at="2019-01-03T16:12:15Z" finished-at="2019-01-03T16:12:20Z">
+      <class name="com.bookit.tests.HRRestAPIGetRequests">
+        <test-method status="PASS" signature="getWithHeaders()[pri:0, instance:com.bookit.tests.HRRestAPIGetRequests@464bee09]" name="getWithHeaders" duration-ms="2614" started-at="2019-01-03T16:12:15Z" finished-at="2019-01-03T16:12:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getWithHeaders -->
+        <test-method status="PASS" signature="negativeGet()[pri:0, instance:com.bookit.tests.HRRestAPIGetRequests@464bee09]" name="negativeGet" duration-ms="269" started-at="2019-01-03T16:12:18Z" finished-at="2019-01-03T16:12:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- negativeGet -->
+        <test-method status="PASS" signature="negativeGetResponse()[pri:0, instance:com.bookit.tests.HRRestAPIGetRequests@464bee09]" name="negativeGetResponse" duration-ms="969" started-at="2019-01-03T16:12:18Z" finished-at="2019-01-03T16:12:19Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- negativeGetResponse -->
+        <test-method status="PASS" signature="printResponse()[pri:0, instance:com.bookit.tests.HRRestAPIGetRequests@464bee09]" name="printResponse" duration-ms="294" started-at="2019-01-03T16:12:19Z" finished-at="2019-01-03T16:12:19Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- printResponse -->
+        <test-method status="PASS" signature="simpleGet()[pri:0, instance:com.bookit.tests.HRRestAPIGetRequests@464bee09]" name="simpleGet" duration-ms="274" started-at="2019-01-03T16:12:19Z" finished-at="2019-01-03T16:12:19Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- simpleGet -->
+        <test-method status="PASS" signature="verifyContentTypeWithAssertThat()[pri:0, instance:com.bookit.tests.HRRestAPIGetRequests@464bee09]" name="verifyContentTypeWithAssertThat" duration-ms="258" started-at="2019-01-03T16:12:19Z" finished-at="2019-01-03T16:12:20Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyContentTypeWithAssertThat -->
+        <test-method status="PASS" signature="verifyFirstName()[pri:0, instance:com.bookit.tests.HRRestAPIGetRequests@464bee09]" name="verifyFirstName" duration-ms="659" started-at="2019-01-03T16:12:20Z" finished-at="2019-01-03T16:12:20Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyFirstName -->
+        <test-method status="PASS" signature="verifyFirstNameAndEmpID()[pri:0, instance:com.bookit.tests.HRRestAPIGetRequests@464bee09]" name="verifyFirstNameAndEmpID" duration-ms="132" started-at="2019-01-03T16:12:20Z" finished-at="2019-01-03T16:12:20Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyFirstNameAndEmpID -->
+      </class> <!-- com.bookit.tests.HRRestAPIGetRequests -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

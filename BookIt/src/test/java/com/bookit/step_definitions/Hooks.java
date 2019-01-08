@@ -14,12 +14,12 @@ import cucumber.api.java.Before;
 
 public class Hooks {
 
-	@Before
-	public void setUp() {
-		Driver.getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//	@Before
+//	public void setUp() {
+//		Driver.getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 //		Driver.getDriver().manage().window().maximize();
-	
-	}
+//	
+//	}
 	
 	@Before("@db")
 	public void setUpDBConnection() {
